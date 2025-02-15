@@ -1,0 +1,77 @@
+body{
+    background-color: #2a2a2a;
+}
+
+.upperContainer{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(255, 255, 255);
+    height: 12vh;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+   
+
+}
+.addTaskContainer{
+    margin-top: 20px;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    height: 15vh;
+    display: flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.addTaskContainer input{
+    border-radius: 0px;
+    height: 20px;
+    border: none;
+}
+.addTaskContainer button{
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #2a2a2a;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px 10px 20px;
+}
+
+.addTaskContainer button:hover{
+    cursor: pointer;   
+    font-weight: 600;         
+    transform: scale(1.15);      
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+.singleTask{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(255, 255, 255);
+    height: 5vh;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4px;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.iconContainer{
+    display: flex;
+    gap: 10px;
+}
+.singleTask .fa-trash:hover {
+   cursor: pointer;
+   color: red;
+   transform: scale(1.1);   
+}
+.singleTask .fa-pen-to-square:hover {
+    cursor: pointer;
+    color: rgb(141, 255, 47);
+   transform: scale(1.1);   
+ }
+ 
