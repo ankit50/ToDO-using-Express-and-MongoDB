@@ -7,6 +7,7 @@ const app = express();
 
 //Middileware to parse the JSON data send in body
 app.use(express.json());
+app.use(express.static('./frontEnd'));
 app.use('/api/v1/tasks', routes);
 //for invalid routes
 app.use((req,res)=>{res.status(404).send("Route Not Found")});
