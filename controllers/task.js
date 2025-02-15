@@ -1,20 +1,62 @@
 import Task from '../models/task.js';
 
-export const getAllTask = (req,res)=>{
-    res.send("Get All Task");
+export const getAllTask = async (req,res)=>{
+    try {
+        const allTasks = await Task.find({});
+        res.status(201).json({allTasks});
+    } catch (error) {
+        res.status(500).json({msg:error});
+    }
 }
-export const getSingleTask = (req,res)=>{
-    res.send("Get single Task");
+
+export const getSingleTask = async (req,res)=>{
+    try {
+        const {id:taskID} = req.params;
+        const singleTask = await Task.findOne({_id:taskID});
+        if(!singleTask){
+            return res.status(404).json({msg:`No task with id:${taskID}`});
+        }
+        res.status(500).json({singleTask}); 
+    } catch (error) {
+        res.status(500).json({msg:error});
+    }
 }
-export const updateTask = (req, res)=>{
-    res.send("Update Task");
+
+export const updateTask = async (req, res)=>{
+    try {
+        const {id:taskID}= req.params;
+        const updateTask = await Task.findOneAndUpdate({_id:taskID}, req.body,{
+            new:true,
+            runValidators:true
+        });
+        if(!updateTask){
+            res.status(404).json({msg:`No task with id: ${taskID}`});
+        }
+        res.status(500).json({updateTask});
+    } catch (error) {
+        res.status(500).json({msg:error});
+    }
 }
-export const deleteTask = (req,res)=>{
-    res.send("Delete Task");
+
+export const deleteTask = async (req,res)=>{
+    try {
+        const {id:taskID} = req.params;
+        const deleteTask = await Task.findOneAndDelete({_id:taskID});
+        if(!deleteTask){
+           return res.status(404).json({msg:`No task with id :${taskID}`});  
+        }
+        res.status(200).json({deleteTask});
+    } catch (error) {
+        res.status(500).json({msg:error});
+    }
 }
+
 export const createTask = async (req,res)=>{
-    const task = await Task.create(req.body);
-    res.status(201).json({task});
+    try {
+        const task = await Task.create(req.body);
+        res.status(201).json({task});
+    } catch (error) {
+    res.status(500).json({msg:error});
+    }
    
 }
-export default getAllTask;

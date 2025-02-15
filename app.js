@@ -8,6 +8,8 @@ const app = express();
 //Middileware to parse the JSON data send in body
 app.use(express.json());
 app.use('/api/v1/tasks', routes);
+//for invalid routes
+app.use((req,res)=>{res.status(404).send("Route Not Found")});
 const start = async ()=>{
     try {
         await connectDB(process.env.MONGO_URI);
@@ -16,4 +18,5 @@ const start = async ()=>{
         console.log(error);
     }
 }
+
 start();
