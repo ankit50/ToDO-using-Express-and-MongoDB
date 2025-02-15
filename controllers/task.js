@@ -54,9 +54,11 @@ export const deleteTask = async (req,res)=>{
 export const createTask = async (req,res)=>{
     try {
         const task = await Task.create(req.body);
-        res.status(201).json({task});
+        console.log("Successsss added:"+task);
+        //res.status(201).json({task});
     } catch (error) {
-    res.status(500).json({msg:error});
+        console.log("error...");
+        //res.status(500).json({msg:error});
     }
    
 }
