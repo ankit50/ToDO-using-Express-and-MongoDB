@@ -1,15 +1,37 @@
-const submit = document.querySelector('.addTaskBtn');
+import { addSingleTaskToHTMLList } from "./function.js";
 
-function addTask(){
+const submit = document.querySelector('.addTaskBtn');
+async function addTask(){
     const taskToAdd = document.querySelector('.newTask').value.trim();
-    fetch('/api/v1/tasks/', {
+    if(!taskToAdd){
+        alert("Task Cannot be Empty!");
+        return;
+    }
+    await fetch('/api/v1/tasks/', {
         method:'POST',
         headers:{'Content-Type':'application/json',},
         body:JSON.stringify({name:taskToAdd}),
-    });
-    taskToAdd.value='';
+    })
+    .then(response=>{
+        if(response.status===201){
+            alert("Task added succesfully.");
+        }else{
+            alert("Could not add the task!");
+        }
+    })
+    .catch((error)=>{alert("Could not add the task!")});
 }
-
+window.onload = async ()=>{
+    try {
+        const response = await fetch('/api/v1/tasks', {
+            method:'GET'
+        });
+        const allTask = await response.json();
+        console.log(allTask.allTasks[0]);
+    } catch (error) {
+        alert('Error loading the tasks........');
+    }
+}
 submit.addEventListener('click', (e) => {
     e.preventDefault();
     addTask();

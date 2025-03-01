@@ -1,9 +1,11 @@
 import Task from '../models/task.js';
 
 export const getAllTask = async (req,res)=>{
+    console.log("Before try in getAllTask");
     try {
+        console.log("Inside try in getAllTask");
         const allTasks = await Task.find({});
-        res.status(201).json({allTasks});
+        res.status(200).json({allTasks});
     } catch (error) {
         res.status(500).json({msg:error});
     }
@@ -53,12 +55,10 @@ export const deleteTask = async (req,res)=>{
 
 export const createTask = async (req,res)=>{
     try {
-        const task = await Task.create(req.body);
-        console.log("Successsss added:"+task);
-        //res.status(201).json({task});
-    } catch (error) {
-        console.log("error...");
-        //res.status(500).json({msg:error});
+        await Task.create(req.body);
+        res.status(201).end();
+    } catch (error){
+        res.status(500).end();
     }
    
 }
