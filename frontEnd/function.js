@@ -1,6 +1,7 @@
 export function addSingleTaskToHTMLList(task) {
     const singleTask = document.createElement('div');
     singleTask.classList.add('singleTask');
+    singleTask.dataset.id = task._id;
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
     checkBox.classList.add('checkBox');
@@ -27,30 +28,15 @@ export function addSingleTaskToHTMLList(task) {
     deleteIcon.onclick = () => {
         deleteTaskFromHTMLList(task._id);
     }
-    editIcon.onclick = () => {
-        editTaskFromHTMLList(task._id);
-    }
+    // editIcon.onclick = () => {
+    //     editTaskFromHTMLList(task._id);
+    // }
 }
 async function deleteTaskFromHTMLList(id) {
-    try {
+        const taskId = document.querySelector(`[data-id="${id}"]`);
         const response = await fetch(`/api/v1/tasks/${id}`, {
             method:'DELETE',
         });
-        if (!response.ok) {
-            const data = await response.json();
-            console.log(data.msg);  // Print the message from the server
-            return; // Exit the function early if the response is not OK
-        }
+        taskId.remove();
 
-        // If the response is OK, parse the data and log it
-        const data = await response.json();
-        console.log(data); 
-    } catch (error) {
-        console.log(error);
-    }
-   
-
-}
-async function editTaskFromHTMLList(id) {
-    console.log("Edit icon: " + id);
 }

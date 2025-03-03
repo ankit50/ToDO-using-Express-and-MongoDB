@@ -12,10 +12,10 @@ async function addTask() {
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify({ name: taskToAdd }),
     })
-        .then(response => {
+        .then(async response => {
             if (response.status === 201) {
-                addSingleTaskToHTMLList({name:taskToAdd, completed:false});
-                alert("Task added succesfully.");
+                const data = await response.json();
+                addSingleTaskToHTMLList(data.newTask);
             } else {
                 alert("Could not add the task!");
             }

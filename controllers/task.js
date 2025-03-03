@@ -49,15 +49,14 @@ export const deleteTask = async (req,res)=>{
         }
         res.status(200).json({deleteTask});
     } catch (error) {
-        console.log(error);
         res.status(500).json({msg:error});
     }
 }
 
 export const createTask = async (req,res)=>{
     try {
-        await Task.create(req.body);
-        res.status(201).end();
+        const newTask = await Task.create(req.body);
+        res.status(201).json({newTask});
     } catch (error){
         res.status(500).end();
     }
