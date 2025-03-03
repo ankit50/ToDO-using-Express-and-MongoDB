@@ -1,7 +1,6 @@
 import { addSingleTaskToHTMLList } from "./function.js";
 
 const submit = document.querySelector('.addTaskBtn');
-
 async function addTask() {
     const taskToAdd = document.querySelector('.newTask').value.trim();
     if (!taskToAdd) {
@@ -15,6 +14,7 @@ async function addTask() {
     })
         .then(response => {
             if (response.status === 201) {
+                addSingleTaskToHTMLList({name:taskToAdd, completed:false});
                 alert("Task added succesfully.");
             } else {
                 alert("Could not add the task!");
@@ -35,6 +35,11 @@ window.onload = async () => {
         alert('Error loading the tasks........');
     }
 }
+// document.body.addEventListener('click', (e) => {
+//     if(e.target.classList.contains('fa-trash')){
+//         console.log('delte clicked...');
+//     }
+// });
 submit.addEventListener('click', (e) => {
     e.preventDefault();
     addTask();
