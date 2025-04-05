@@ -2,6 +2,8 @@ import express from 'express';
 import routes from './routes/task.js';
 import connectDB from './database/db.js';
 import dotenv from 'dotenv';
+import notFound from './middlewares/notFound.js';
+import errorHandler from "./middlewares/errorHandler.js";
 dotenv.config();
 const app = express();
 
@@ -10,7 +12,9 @@ app.use(express.json());
 app.use(express.static('./frontEnd'));
 app.use('/api/v1/tasks', routes);
 //for invalid routes
-app.use((req,res)=>{res.status(404).send("Route Not Found")});
+app.use(notFound);                                        
+//for handling errors
+app.use(errorHandler);
 const start = async ()=>{
     try {
         await connectDB(process.env.MONGO_URI);
@@ -19,5 +23,4 @@ const start = async ()=>{
         console.log(error);
     }
 }
-
 start();
